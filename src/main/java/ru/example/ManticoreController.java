@@ -1,6 +1,5 @@
 package ru.example;
 
-import com.manticoresearch.client.ApiException;
 import com.manticoresearch.client.model.*;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.Map;
 
 public class ManticoreController {
 
-    private String tableName;
+    private String tableName = "post_table";
     private ManticoreService service;
 
     public ManticoreController(SearchCore core){
@@ -64,8 +63,9 @@ public class ManticoreController {
         System.out.println("Полный ответ:");
         System.out.println(response.toString());
         System.out.println("Детали:");
-        for(String key : response.getAggregations().keySet()){
-            System.out.println(key + " | " + response.getAggregations().get(key));
+        List<Object> objects = response.getHits().getHits();
+        for(Object object : objects){
+            System.out.println(object.toString());
         }
     }
 
