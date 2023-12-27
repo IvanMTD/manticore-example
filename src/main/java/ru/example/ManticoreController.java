@@ -14,6 +14,13 @@ public class ManticoreController {
         service = new ManticoreService(core);
     }
 
+    public void executeSql(String sqlCommand){
+        List<Object> response = service.executeCommand(sqlCommand);
+        for(Object object : response){
+            System.out.println(object.toString());
+        }
+    }
+
     /**
      * Описание параметров
      * @param tableName - название таблицы на пример some_table
@@ -22,7 +29,7 @@ public class ManticoreController {
      */
     public void createTable(String tableName, String tableParam, boolean readResponse){
         this.tableName = tableName;
-        String sqlCommand = "create table if not exists " + tableName + tableParam + " morphology='stem_enru, libstemmer_ru'";
+        String sqlCommand = "create table if not exists " + tableName + tableParam + " morphology='stem_ru' html_strip = '1'";
         List<Object> response = service.executeCommand(sqlCommand);
         if(readResponse){
             for(Object object : response){

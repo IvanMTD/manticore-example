@@ -15,7 +15,8 @@ public class Main {
                     "1. create - Задать таблицу \n" +
                     "2. insert - Добавить запись в таблицу \n" +
                     "3. search - Искать записи в таблице по словам или предложениям \n" +
-                    "4. over   - завершить и выйти \n" +
+                    "4. execute - Исполнить sql команду \n" +
+                    "5. over   - завершить и выйти \n" +
                     "Напишите что будем делать?");
             String choose = scanner.nextLine();
 
@@ -107,6 +108,20 @@ public class Main {
                         searchOver = true;
                     }else {
                         controller.search(request);
+                    }
+                }
+            }else if(choose.equals("execute")){
+                boolean executeOver = false;
+                while (!executeOver){
+                    scanner = new Scanner(System.in);
+                    System.out.println("Введите команду для выполнения sql");
+                    String sqlCommand = scanner.nextLine();
+                    controller.executeSql(sqlCommand);
+                    scanner = new Scanner(System.in);
+                    System.out.println("Еще команду? Да(y)/Нет(n)");
+                    String answer = scanner.nextLine();
+                    if(answer.equals("n")){
+                        executeOver = true;
                     }
                 }
             }else if(choose.equals("over")){
